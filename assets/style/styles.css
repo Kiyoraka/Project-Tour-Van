@@ -1049,6 +1049,10 @@ input:focus-visible,
   color: var(--ink-700);
   line-height: 1.65;
   margin-bottom: var(--space-4);
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .content-block__list {
