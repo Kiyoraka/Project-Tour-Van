@@ -128,6 +128,369 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================================
+   Phase 3: Hero Section
+   ============================================================================ */
+.hero {
+  position: relative;
+  min-height: 720px;
+  background: var(--hero-gradient);
+  color: var(--surface);
+  overflow: hidden;
+  padding: var(--space-16) 0 var(--space-24);
+  isolation: isolate;
+}
+
+.hero__container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  text-align: center;
+}
+
+.hero__headline {
+  color: var(--surface);
+  font-size: clamp(32px, 5.4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  max-width: 14ch;
+  margin: 0 auto;
+  text-shadow: 0 2px 12px rgba(15, 27, 45, 0.15);
+}
+
+/* Hero decorative cutouts (positioned absolutely on hero) */
+.hero__decor {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.85;
+  width: clamp(180px, 22vw, 320px);
+  height: clamp(220px, 28vw, 380px);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50% 50% 0 0;
+  filter: blur(0.5px);
+}
+.hero__decor--left {
+  left: 0;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+}
+.hero__decor--right {
+  right: 0;
+  background-image: linear-gradient(225deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: calc(100svh - var(--header-height));
+    padding: var(--space-8) 0 var(--space-12);
+  }
+  .hero__decor { width: 140px; height: 180px; opacity: 0.5; }
+}
+
+/* ----------------------------------------------------------------------------
+   Trip Toggle (One way / Return trip pills)
+   ---------------------------------------------------------------------------- */
+.trip-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.trip-toggle__pill {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  transition: background 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
+}
+
+.trip-toggle__pill.is-active {
+  background: var(--surface);
+  color: var(--brand-primary);
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.15);
+}
+
+.trip-toggle__pill:not(.is-active):hover {
+  color: var(--surface);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ----------------------------------------------------------------------------
+   Booking Card
+   ---------------------------------------------------------------------------- */
+.booking-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-booking);
+  padding: var(--space-2);
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.booking-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid rgba(15, 27, 45, 0.06);
+  position: relative;
+}
+.booking-row:last-of-type { border-bottom: none; }
+
+.booking-row__icon {
+  font-size: 18px;
+  color: var(--ink-700);
+  width: 24px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.booking-row__field {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.booking-row__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-500);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.booking-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink-700);
+  padding: 0;
+}
+.booking-input::placeholder { color: var(--ink-500); font-weight: 400; }
+.booking-input:focus { color: var(--ink-900); }
+/* Native date picker chrome cleanup */
+.booking-input[type="date"] {
+  font-family: var(--font-display);
+}
+
+/* Pax trigger row (entire row is the popover trigger) */
+.booking-row--pax { padding: 0; border-bottom: 1px solid rgba(15, 27, 45, 0.06); }
+
+.pax-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ink-700);
+  text-align: left;
+}
+.pax-trigger:hover { background: var(--surface-soft); }
+
+.pax-trigger__group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pax-trigger__group i { font-size: 18px; color: var(--ink-700); }
+
+.pax-trigger__caret {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--ink-500);
+  transition: transform 0.18s ease;
+}
+.pax-trigger[aria-expanded="true"] .pax-trigger__caret { transform: rotate(180deg); }
+
+/* Pax popover (absolute, opens below trigger) */
+.pax-popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-booking);
+  padding: var(--space-4);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.pax-popover[hidden] { display: none; }
+
+.pax-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 12px;
+}
+.pax-stepper:hover { background: var(--surface-soft); }
+
+.pax-stepper__label strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+.pax-stepper__label small {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-500);
+}
+
+.pax-stepper__controls {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.pax-stepper__btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid rgba(15, 27, 45, 0.12);
+  color: var(--ink-700);
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.pax-stepper__btn:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+.pax-stepper__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pax-stepper__value {
+  display: inline-block;
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink-900);
+}
+
+.pax-popover__done {
+  margin-top: var(--space-2);
+  background: var(--brand-primary);
+  color: var(--surface);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: var(--radius-btn);
+  align-self: flex-end;
+}
+.pax-popover__done:hover { background: var(--brand-primary-dark); }
+
+/* CTA button (Find a ride) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn--primary {
+  background: var(--brand-primary);
+  color: var(--surface);
+  border-radius: var(--radius-btn);
+}
+.btn--primary:hover { background: var(--brand-primary-dark); }
+
+.btn--cta {
+  width: 100%;
+  height: 56px;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  margin: var(--space-4) var(--space-2) var(--space-2);
+  width: calc(100% - var(--space-4));
+}
+.btn--cta__arrow {
+  transition: transform 0.18s ease;
+}
+.btn--cta:hover .btn--cta__arrow { transform: translateX(4px); }
+
+/* Trust row */
+.trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-8);
+  margin-top: var(--space-2);
+  color: var(--surface);
+}
+
+.trust-row__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.trust-row__check {
+  color: var(--success);
+  background: var(--surface);
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .booking-card { max-width: 100%; }
+  .trip-toggle { width: 100%; }
+  .trip-toggle__pill { flex: 1; }
+
+  .trust-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: 0 var(--space-2);
+  }
+
+  .pax-trigger { gap: var(--space-4); }
+}
+
+@media (min-width: 1280px) {
+  .booking-card { max-width: 560px; }
+}
+
+/* ============================================================================
    Phase 2: Site Header
    ============================================================================ */
 .site-header {

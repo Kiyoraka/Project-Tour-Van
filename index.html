@@ -45,7 +45,156 @@
   </header>
 
   <main>
-    <!-- Phase 3+: hero, reviews, features, how-to-book, content sections, routes, FAQ -->
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" id="hero">
+      <div class="hero__container container">
+        <h1 class="hero__headline">Private Transfers,<br>Discover Local Experiences</h1>
+
+        <!-- Trip type pills -->
+        <div class="trip-toggle" id="tripToggle" role="tablist" aria-label="Trip type">
+          <button type="button" class="trip-toggle__pill is-active" data-trip="oneway" role="tab" aria-selected="true">One way</button>
+          <button type="button" class="trip-toggle__pill" data-trip="return" role="tab" aria-selected="false">Return trip</button>
+        </div>
+
+        <!-- Booking card -->
+        <form class="booking-card" id="bookingForm" novalidate>
+          <div class="booking-row">
+            <i class="fa-solid fa-location-dot booking-row__icon" aria-hidden="true"></i>
+            <div class="booking-row__field">
+              <label class="booking-row__label" for="bookingFrom">From</label>
+              <input type="text" class="booking-input" id="bookingFrom" name="from" placeholder="City, Hotel, Airport" list="cityList" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="booking-row">
+            <i class="fa-solid fa-location-arrow booking-row__icon" aria-hidden="true"></i>
+            <div class="booking-row__field">
+              <label class="booking-row__label" for="bookingTo">To</label>
+              <input type="text" class="booking-input" id="bookingTo" name="to" placeholder="City, Hotel, Airport" list="cityList" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="booking-row">
+            <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
+            <div class="booking-row__field">
+              <label class="booking-row__label" for="bookingDate">Departure</label>
+              <input type="date" class="booking-input" id="bookingDate" name="date" required>
+            </div>
+          </div>
+
+          <div class="booking-row booking-row--return" id="bookingReturnRow" hidden>
+            <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
+            <div class="booking-row__field">
+              <label class="booking-row__label" for="bookingReturnDate">Return</label>
+              <input type="date" class="booking-input" id="bookingReturnDate" name="returnDate">
+            </div>
+          </div>
+
+          <div class="booking-row booking-row--pax">
+            <button type="button" class="pax-trigger" id="paxTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="paxPopover">
+              <span class="pax-trigger__group"><i class="fa-solid fa-user-group" aria-hidden="true"></i><span id="paxCountDisplay">2</span></span>
+              <span class="pax-trigger__group"><i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i><span id="luggageCountDisplay">2</span></span>
+              <span class="pax-trigger__group"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span id="carryonCountDisplay">1</span></span>
+              <i class="fa-solid fa-chevron-down pax-trigger__caret" aria-hidden="true"></i>
+            </button>
+
+            <div class="pax-popover" id="paxPopover" hidden>
+              <div class="pax-stepper">
+                <div class="pax-stepper__label">
+                  <strong>Passengers</strong>
+                  <small>Adults &amp; children</small>
+                </div>
+                <div class="pax-stepper__controls">
+                  <button type="button" class="pax-stepper__btn" data-step="-1" data-target="pax" aria-label="Decrease passengers"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
+                  <span class="pax-stepper__value" id="paxCount">2</span>
+                  <button type="button" class="pax-stepper__btn" data-step="1" data-target="pax" aria-label="Increase passengers"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div class="pax-stepper">
+                <div class="pax-stepper__label">
+                  <strong>Luggage</strong>
+                  <small>Large suitcases</small>
+                </div>
+                <div class="pax-stepper__controls">
+                  <button type="button" class="pax-stepper__btn" data-step="-1" data-target="luggage" aria-label="Decrease luggage"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
+                  <span class="pax-stepper__value" id="luggageCount">2</span>
+                  <button type="button" class="pax-stepper__btn" data-step="1" data-target="luggage" aria-label="Increase luggage"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div class="pax-stepper">
+                <div class="pax-stepper__label">
+                  <strong>Carry-on</strong>
+                  <small>Small bags</small>
+                </div>
+                <div class="pax-stepper__controls">
+                  <button type="button" class="pax-stepper__btn" data-step="-1" data-target="carryon" aria-label="Decrease carry-on"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
+                  <span class="pax-stepper__value" id="carryonCount">1</span>
+                  <button type="button" class="pax-stepper__btn" data-step="1" data-target="carryon" aria-label="Increase carry-on"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <button type="button" class="pax-popover__done" id="paxPopoverDone">Done</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--cta" id="bookingSubmit">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <span>Find a ride</span>
+            <i class="fa-solid fa-arrow-right-long btn--cta__arrow" aria-hidden="true"></i>
+          </button>
+        </form>
+
+        <!-- Trust row -->
+        <ul class="trust-row">
+          <li class="trust-row__item">
+            <i class="fa-solid fa-circle-check trust-row__check" aria-hidden="true"></i>
+            <span>Free cancellation up to 24 hours before pickup</span>
+          </li>
+          <li class="trust-row__item">
+            <i class="fa-solid fa-circle-check trust-row__check" aria-hidden="true"></i>
+            <span>English-speaking drivers</span>
+          </li>
+          <li class="trust-row__item">
+            <i class="fa-solid fa-circle-check trust-row__check" aria-hidden="true"></i>
+            <span>Instant booking confirmation</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Decorative cutouts (positioned absolutely, hidden on small mobile) -->
+      <div class="hero__decor hero__decor--left" aria-hidden="true"></div>
+      <div class="hero__decor hero__decor--right" aria-hidden="true"></div>
+
+      <!-- Shared autocomplete list for From/To -->
+      <datalist id="cityList">
+        <option value="Kuala Lumpur International Airport (KLIA)"></option>
+        <option value="KLIA Terminal 2 (klia2)"></option>
+        <option value="Subang Airport (Sultan Abdul Aziz Shah)"></option>
+        <option value="Bukit Bintang, Kuala Lumpur"></option>
+        <option value="KL Sentral, Kuala Lumpur"></option>
+        <option value="Kuala Lumpur City Centre (KLCC)"></option>
+        <option value="Petaling Jaya"></option>
+        <option value="Shah Alam"></option>
+        <option value="Klang"></option>
+        <option value="Putrajaya"></option>
+        <option value="Cyberjaya"></option>
+        <option value="Genting Highlands"></option>
+        <option value="Cameron Highlands"></option>
+        <option value="Ipoh, Perak"></option>
+        <option value="Penang (George Town)"></option>
+        <option value="Seberang Jaya, Penang"></option>
+        <option value="Sungai Petani, Kedah"></option>
+        <option value="Alor Setar, Kedah"></option>
+        <option value="Langkawi"></option>
+        <option value="Johor Bahru"></option>
+        <option value="Melaka (Malacca)"></option>
+        <option value="Kuantan, Pahang"></option>
+        <option value="Kota Bharu, Kelantan"></option>
+        <option value="Kuala Terengganu"></option>
+        <option value="Kota Kinabalu, Sabah"></option>
+        <option value="Kuching, Sarawak"></option>
+      </datalist>
+    </section>
+    <!-- ==================== /HERO ==================== -->
   </main>
 
   <footer class="site-footer">
