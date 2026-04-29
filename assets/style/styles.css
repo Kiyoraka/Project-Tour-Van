@@ -491,6 +491,108 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================================
+   Phase 4: TripAdvisor Reviews
+   ============================================================================ */
+.reviews {
+  background: var(--surface-soft);
+  padding: var(--space-16) 0;
+}
+
+.reviews__rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.reviews__stars {
+  color: var(--star);
+  font-size: 22px;
+  display: inline-flex;
+  gap: 4px;
+}
+
+.reviews__rating-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.reviews__rating-text strong {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+.reviews__rating-text span {
+  font-size: 14px;
+  color: var(--ink-500);
+}
+
+.reviews__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.review-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-route);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.review-card__stars {
+  color: var(--star);
+  font-size: 14px;
+  display: inline-flex;
+  gap: 2px;
+}
+
+.review-card__quote {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-700);
+  font-weight: 500;
+}
+
+.review-card__author {
+  font-size: 14px;
+  color: var(--ink-500);
+  margin-top: auto;
+}
+
+@media (max-width: 1023px) {
+  .reviews__cards {
+    grid-template-columns: none;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 calc(var(--space-4) * -1);
+    padding: 0 var(--space-4);
+    gap: var(--space-4);
+  }
+  .reviews__cards::-webkit-scrollbar { display: none; }
+  .review-card {
+    flex: 0 0 88%;
+    scroll-snap-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .reviews { padding: var(--space-8) 0; }
+  .reviews__rating { gap: var(--space-2); margin-bottom: var(--space-6); }
+  .reviews__rating-text { align-items: center; text-align: center; }
+}
+
+/* ============================================================================
    Phase 2: Site Header
    ============================================================================ */
 .site-header {
