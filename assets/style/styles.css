@@ -161,26 +161,26 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: 0 2px 12px rgba(15, 27, 45, 0.15);
 }
 
-/* Hero decorative cutouts (positioned absolutely on hero) */
+/* Hero decorative cutouts (real Midjourney transparent PNGs anchored at bottom corners) */
 .hero__decor {
   position: absolute;
   bottom: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.85;
-  width: clamp(180px, 22vw, 320px);
-  height: clamp(220px, 28vw, 380px);
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 50% 50% 0 0;
-  filter: blur(0.5px);
+  width: clamp(220px, 26vw, 380px);
+  height: clamp(280px, 34vw, 460px);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: contain;
+  filter: drop-shadow(0 8px 24px rgba(15, 27, 45, 0.25));
 }
 .hero__decor--left {
-  left: 0;
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+  left: clamp(8px, 2vw, 32px);
+  background-image: url('../img/hero-suitcase-cutout.png');
 }
 .hero__decor--right {
-  right: 0;
-  background-image: linear-gradient(225deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+  right: clamp(8px, 2vw, 32px);
+  background-image: url('../img/hero-traveler-cutout.png');
 }
 
 @media (max-width: 767px) {
@@ -188,7 +188,11 @@ h1, h2, h3, h4, h5, h6 {
     min-height: calc(100svh - var(--header-height));
     padding: var(--space-8) 0 var(--space-12);
   }
-  .hero__decor { width: 140px; height: 180px; opacity: 0.5; }
+  .hero__decor {
+    width: 130px;
+    height: 170px;
+    opacity: 0.7;
+  }
 }
 
 /* ----------------------------------------------------------------------------
@@ -933,13 +937,13 @@ input:focus-visible,
   background: linear-gradient(180deg, transparent 50%, rgba(15, 27, 45, 0.18) 100%);
 }
 
-/* Destination-evocative gradient placeholders (real photos drop in at Phase 8B) */
-.route-card__image--bukit-bintang { background-image: linear-gradient(135deg, #4a3aa8 0%, #b53389 50%, #f7a13a 100%); }
-.route-card__image--ipoh           { background-image: linear-gradient(135deg, #6b8e3a 0%, #c5b358 50%, #f0e1b8 100%); }
-.route-card__image--genting        { background-image: linear-gradient(135deg, #1a3a5e 0%, #4f7ab5 50%, #b3c8e0 100%); }
-.route-card__image--jb             { background-image: linear-gradient(135deg, #c63d2f 0%, #e8924a 50%, #f5d585 100%); }
-.route-card__image--melaka         { background-image: linear-gradient(135deg, #a8232a 0%, #d65a3a 50%, #f0a566 100%); }
-.route-card__image--penang         { background-image: linear-gradient(135deg, #2a6d6a 0%, #6cb4a6 50%, #cee5d5 100%); }
+/* Real destination photography (Midjourney v6.1 cinematic) */
+.route-card__image--bukit-bintang { background-image: url('../img/route-klia-bukit-bintang.png'); }
+.route-card__image--ipoh           { background-image: url('../img/route-klia-ipoh.png'); }
+.route-card__image--genting        { background-image: url('../img/route-klia-genting.png'); }
+.route-card__image--jb             { background-image: url('../img/route-klia-jb.png'); }
+.route-card__image--melaka         { background-image: url('../img/route-klia-melaka.png'); }
+.route-card__image--penang         { background-image: url('../img/route-klia-penang.png'); }
 
 .route-card__body {
   padding: var(--space-5, 20px);
@@ -1082,24 +1086,25 @@ input:focus-visible,
   border-radius: var(--radius-card);
   min-height: 320px;
   background: var(--brand-tint);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-route);
 }
 .content-block__visual::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(63,106,219,0.18), rgba(63,106,219,0.05) 60%, rgba(255,255,255,0));
+  background: linear-gradient(135deg, rgba(63,106,219,0.06), rgba(15,27,45,0.04) 60%, rgba(255,255,255,0));
+  pointer-events: none;
 }
-.content-block__visual--cameron {
-  background-image: linear-gradient(135deg, #4ea66a 0%, #7cc497 50%, #b5dcc4 100%);
-}
-.content-block__visual--booking {
-  background-image: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
-}
-.content-block__visual--map {
-  background-image: linear-gradient(135deg, #e7eef8 0%, #c4d4ee 50%, #6e8de5 100%);
-}
+
+/* Real Midjourney photography */
+.content-block__visual--cameron { background-image: url('../img/content-cameron-highlands.png'); }
+.content-block__visual--booking { background-image: url('../img/content-booking-experience.png'); }
+.content-block__visual--map     { background-image: url('../img/content-multi-city-map.png'); }
 
 @media (max-width: 1023px) {
   .content-block__inner { grid-template-columns: 1fr; gap: var(--space-8); }
