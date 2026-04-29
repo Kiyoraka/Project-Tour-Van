@@ -569,6 +569,94 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================================
+   Phase 11: Responsive Polish, Accessibility, Reduced Motion
+   ============================================================================ */
+
+/* Anchor scroll-margin so jump-links land below the sticky header */
+[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
+
+/* Visible focus ring on interactive elements (a11y) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+.trip-toggle__pill:focus-visible,
+.route-card:focus-visible,
+.faq__summary:focus-visible,
+.pax-stepper__btn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.booking-input:focus-visible {
+  outline: none;
+}
+.booking-row:focus-within {
+  background: var(--surface-soft);
+}
+
+/* Disable native focus when keyboard is not the source */
+.route-card:focus { outline: none; }
+
+/* Selection color on brand */
+::selection {
+  background: rgba(63, 106, 219, 0.18);
+  color: var(--ink-900);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print-friendly: hide nav, hero CTA, footer bar */
+@media print {
+  .site-header,
+  .site-footer__bar,
+  .trip-toggle,
+  .booking-card,
+  .site-footer__social { display: none !important; }
+  .hero { background: var(--surface) !important; color: var(--ink-900) !important; }
+  .hero__headline { color: var(--ink-900) !important; }
+  body { color: var(--ink-900); }
+}
+
+/* Smooth scroll behavior already on html (token), reinforce here */
+
+/* Tablet polish (768-1023): hero + features + routes coordinated */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero { min-height: 640px; }
+  .booking-card { max-width: 460px; }
+  .features__grid { gap: var(--space-4); }
+}
+
+/* Wide-desktop polish (>=1280px) */
+@media (min-width: 1280px) {
+  .hero__container { gap: var(--space-12); }
+  .features__grid { gap: var(--space-8); }
+  .routes__grid { gap: var(--space-8); }
+}
+
+/* Hide visually but keep for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================================
    Phase 10: Site Footer
    ============================================================================ */
 .site-footer {
