@@ -1,0 +1,142 @@
+/* ============================================================================
+   ToursVan Homepage Styles
+   Stack: Vanilla CSS, no framework, no build step
+   Brand: #3F6ADB
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   Design Tokens
+   ---------------------------------------------------------------------------- */
+:root {
+  /* Brand */
+  --brand-primary:       #3F6ADB;
+  --brand-primary-dark:  #2E4FB0;
+  --brand-primary-light: #6E8DE5;
+  --brand-tint:          #EAF0FB;
+
+  /* Ink (text) */
+  --ink-900: #0F1B2D;
+  --ink-700: #33445C;
+  --ink-500: #6B7A90;
+
+  /* Surface */
+  --surface:      #FFFFFF;
+  --surface-soft: #F7F9FC;
+
+  /* Semantic */
+  --success: #16A34A;
+  --star:    #F5A524;
+  --footer-bg: #0F1B2D;
+
+  /* Hero gradient */
+  --hero-gradient: linear-gradient(135deg, #3F6ADB 0%, #2E4FB0 60%, #3F6ADB 100%);
+
+  /* Typography */
+  --font-display: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    var(--font-display);
+
+  /* Spacing scale */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Radii */
+  --radius-card: 20px;
+  --radius-pill: 9999px;
+  --radius-btn:  14px;
+
+  /* Shadows */
+  --shadow-booking:    0 12px 40px rgba(15, 27, 45, 0.12), 0 2px 8px rgba(15, 27, 45, 0.06);
+  --shadow-route:      0 4px 12px rgba(15, 27, 45, 0.06);
+  --shadow-route-hover: 0 12px 24px rgba(63, 106, 219, 0.18);
+  --shadow-header:     0 2px 8px rgba(15, 27, 45, 0.04);
+
+  /* Layout */
+  --header-height: 72px;
+  --container-max: 1200px;
+}
+
+/* ----------------------------------------------------------------------------
+   Reset (modern minimal)
+   ---------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-700);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+svg { display: block; max-width: 100%; height: auto; }
+
+input,
+button,
+textarea,
+select { font: inherit; color: inherit; }
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a { color: inherit; text-decoration: none; }
+
+ul,
+ol { list-style: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--ink-900);
+  line-height: 1.2;
+}
+
+/* ----------------------------------------------------------------------------
+   Utility container
+   ---------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+@media (max-width: 767px) {
+  .container { padding: 0 var(--space-4); }
+}
+
+/* ----------------------------------------------------------------------------
+   Section styles will be added phase-by-phase below
+   Phase 2: .site-header
+   Phase 3: .hero, .trip-toggle, .booking-card, .trust-row
+   Phase 4: .reviews
+   Phase 5: .features
+   Phase 6: .how-to-book
+   Phase 7: content sections
+   Phase 8: .routes, .route-card
+   Phase 9: .faq
+   Phase 10: .site-footer
+   Phase 11: responsive media queries
+   ---------------------------------------------------------------------------- */

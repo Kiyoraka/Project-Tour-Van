@@ -1,5 +1,15 @@
 # List of ignore folder and files
 /[Tt]emp/
+Project Resources/
+
 # List of ignore files
 *.exe
 *.txt
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
