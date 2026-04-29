@@ -569,6 +569,104 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================================
+   Phase 6: How to Book (4 illustrated steps)
+   ============================================================================ */
+.how-to-book {
+  padding: var(--space-16) 0;
+  background: var(--surface-soft);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  position: relative;
+}
+
+.step {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-route);
+}
+
+.step__number {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: var(--surface);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(63, 106, 219, 0.35);
+}
+
+.step__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--brand-tint);
+  color: var(--brand-primary);
+  font-size: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+.step__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.step__desc {
+  font-size: 14px;
+  color: var(--ink-500);
+  line-height: 1.55;
+  max-width: 26ch;
+}
+
+/* Connector arrows between steps on desktop */
+@media (min-width: 1024px) {
+  .step:not(:last-child)::after {
+    content: '\f178'; /* fa-arrow-right-long */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    transform: translateY(-50%);
+    color: var(--brand-primary-light);
+    font-size: 20px;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 1023px) {
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .steps { grid-template-columns: 1fr; }
+  .how-to-book { padding: var(--space-8) 0; }
+}
+
+/* ============================================================================
    Phase 4: TripAdvisor Reviews
    ============================================================================ */
 .reviews {
