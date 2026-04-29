@@ -569,6 +569,123 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================================
+   Phase 7: Content blocks (Stops / Flexible / Multi-city / Testimonial)
+   ============================================================================ */
+.content-block {
+  padding: var(--space-16) 0;
+  background: var(--surface);
+}
+.content-block--alt { background: var(--surface-soft); }
+
+.content-block__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+.content-block__inner--reverse > .content-block__text { order: 2; }
+.content-block__inner--reverse > .content-block__visual { order: 1; }
+
+.content-block__text h2 {
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+  margin-bottom: var(--space-4);
+}
+
+.content-block__text p {
+  font-size: 16px;
+  color: var(--ink-700);
+  line-height: 1.65;
+  margin-bottom: var(--space-4);
+}
+
+.content-block__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.content-block__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 15px;
+  color: var(--ink-700);
+}
+.content-block__list i {
+  color: var(--brand-primary);
+  font-size: 18px;
+  width: 28px;
+  text-align: center;
+}
+
+.content-block__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--brand-primary);
+  font-weight: 600;
+  font-size: 15px;
+  transition: gap 0.18s ease;
+}
+.content-block__link:hover { gap: var(--space-3); color: var(--brand-primary-dark); }
+
+.content-block__visual {
+  border-radius: var(--radius-card);
+  min-height: 320px;
+  background: var(--brand-tint);
+  position: relative;
+  overflow: hidden;
+}
+.content-block__visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(63,106,219,0.18), rgba(63,106,219,0.05) 60%, rgba(255,255,255,0));
+}
+.content-block__visual--cameron {
+  background-image: linear-gradient(135deg, #4ea66a 0%, #7cc497 50%, #b5dcc4 100%);
+}
+.content-block__visual--booking {
+  background-image: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
+}
+.content-block__visual--map {
+  background-image: linear-gradient(135deg, #e7eef8 0%, #c4d4ee 50%, #6e8de5 100%);
+}
+
+@media (max-width: 1023px) {
+  .content-block__inner { grid-template-columns: 1fr; gap: var(--space-8); }
+  .content-block__inner--reverse > .content-block__text { order: initial; }
+  .content-block__inner--reverse > .content-block__visual { order: initial; }
+  .content-block__visual { min-height: 220px; }
+  .content-block { padding: var(--space-12) 0; }
+}
+
+/* Testimonial block */
+.testimonial-block {
+  padding: var(--space-16) 0;
+  background: var(--surface);
+  text-align: center;
+}
+.testimonial-block__quote {
+  font-size: clamp(22px, 2.6vw, 32px);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink-900);
+  max-width: 28ch;
+  margin: 0 auto var(--space-4);
+  line-height: 1.4;
+}
+.testimonial-block__attr {
+  color: var(--ink-500);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ============================================================================
    Phase 6: How to Book (4 illustrated steps)
    ============================================================================ */
 .how-to-book {
