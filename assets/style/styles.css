@@ -562,10 +562,40 @@ h1, h2, h3, h4, h5, h6 {
   .features__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
-  .features__grid { grid-template-columns: 1fr; gap: var(--space-2); }
-  .feature-card { flex-direction: row; text-align: left; align-items: flex-start; gap: var(--space-4); }
-  .feature-card__icon { flex-shrink: 0; margin-bottom: 0; }
-  .feature-card p { max-width: none; }
+  .features__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  /* Switch to grid on mobile so icon stays left, title stacks above description */
+  .feature-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon title"
+      "icon desc";
+    text-align: left;
+    align-items: start;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    padding: var(--space-4) var(--space-2);
+  }
+  .feature-card__icon {
+    grid-area: icon;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    align-self: start;
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+  }
+  .feature-card h3 {
+    grid-area: title;
+    align-self: end;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+  .feature-card p {
+    grid-area: desc;
+    max-width: none;
+    margin-top: 4px;
+  }
 }
 
 /* ============================================================================
