@@ -1021,6 +1021,12 @@ input:focus-visible,
   font-size: 18px;
   flex-shrink: 0;
 }
+.content-block__feature-icon-img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
 .content-block__feature-body h3 {
   font-size: 16px;
   font-weight: 700;
