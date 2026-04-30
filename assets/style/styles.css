@@ -1244,7 +1244,7 @@ input:focus-visible,
   text-align: left;
 }
 .reviews__rating-text strong {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--ink-900);
 }
