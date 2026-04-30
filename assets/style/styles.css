@@ -1035,6 +1035,10 @@ input:focus-visible,
   background: transparent;
   font-size: 36px;
 }
+.content-block__feature-icon--bare .content-block__feature-icon-img {
+  width: 36px;
+  height: 36px;
+}
 .content-block__feature-body h3 {
   font-size: 16px;
   font-weight: 700;
