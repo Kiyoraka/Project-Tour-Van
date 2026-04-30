@@ -627,7 +627,6 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 .trip-toggle__pill:focus-visible,
-.route-card:focus-visible,
 .faq__summary:focus-visible,
 .pax-stepper__btn:focus-visible {
   outline: 2px solid var(--brand-primary);
@@ -640,9 +639,6 @@ input:focus-visible,
 .booking-row:focus-within {
   background: var(--surface-soft);
 }
-
-/* Disable native focus when keyboard is not the source */
-.route-card:focus { outline: none; }
 
 /* Selection color on brand */
 ::selection {
@@ -687,7 +683,6 @@ input:focus-visible,
 @media (min-width: 1280px) {
   .hero__container { gap: var(--space-12); }
   .features__grid { gap: var(--space-8); }
-  .routes__grid { gap: var(--space-8); }
 }
 
 /* Hide visually but keep for screen readers */
@@ -915,119 +910,38 @@ input:focus-visible,
   background: var(--surface);
 }
 
-.routes__grid {
+/* Simple text list (client preference -- no photo cards) */
+.routes__list {
+  list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2) var(--space-8);
+  max-width: 760px;
+  margin: var(--space-8) auto 0;
+  padding: 0;
 }
 
-.route-card {
-  background: var(--surface);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: var(--shadow-route);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  display: flex;
-  flex-direction: column;
-}
-.route-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-route-hover);
-  background: var(--brand-tint);
-}
-
-.route-card__image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-.route-card__image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(15, 27, 45, 0.18) 100%);
-}
-
-/* Real destination photography (Midjourney v6.1 cinematic) */
-.route-card__image--bukit-bintang { background-image: url('../img/route-klia-bukit-bintang.png'); }
-.route-card__image--ipoh           { background-image: url('../img/route-klia-ipoh.png'); }
-.route-card__image--genting        { background-image: url('../img/route-klia-genting.png'); }
-.route-card__image--jb             { background-image: url('../img/route-klia-jb.png'); }
-.route-card__image--melaka         { background-image: url('../img/route-klia-melaka.png'); }
-.route-card__image--penang         { background-image: url('../img/route-klia-penang.png'); }
-
-.route-card__body {
-  padding: var(--space-5, 20px);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  flex: 1;
-}
-
-.route-card__title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--ink-900);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  line-height: 1.3;
-}
-.route-card__title i {
-  color: var(--brand-primary);
-  font-size: 14px;
-}
-
-.route-card__meta {
-  display: flex;
-  gap: var(--space-4);
-  font-size: 13px;
-  color: var(--ink-500);
-}
-.route-card__meta li {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.route-card__meta i {
-  color: var(--brand-primary-light);
-  font-size: 14px;
-}
-
-.route-card__price {
-  font-size: 14px;
+.routes__list li a {
+  display: inline-block;
   color: var(--ink-700);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: var(--space-2);
-  border-top: 1px dashed rgba(15, 27, 45, 0.08);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: color 0.18s ease;
 }
-.route-card__price strong {
-  font-size: 18px;
-  font-weight: 800;
+
+.routes__list li a:hover {
   color: var(--brand-primary);
-  margin: 0 6px;
 }
-.route-card__price i {
-  color: var(--brand-primary);
-  transition: transform 0.18s ease;
-}
-.route-card:hover .route-card__price i { transform: translateX(4px); }
 
 .routes__see-all {
   text-align: center;
-  margin-top: var(--space-12);
+  margin-top: var(--space-8);
 }
 
-@media (max-width: 1023px) {
-  .routes__grid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 600px) {
-  .routes__grid { grid-template-columns: 1fr; }
+  .routes__list { grid-template-columns: 1fr; gap: 0; }
   .routes { padding: var(--space-12) 0; }
 }
 
