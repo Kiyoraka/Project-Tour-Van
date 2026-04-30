@@ -562,6 +562,16 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--space-2);
 }
 
+/* Mask-image colorization: dark-navy PNG silhouettes rendered in --brand-primary */
+.feature-card__icon-glyph {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: var(--brand-primary);
+  -webkit-mask: var(--icon-url) no-repeat center / contain;
+          mask: var(--icon-url) no-repeat center / contain;
+}
+
 .feature-card h3 {
   font-size: 18px;
   font-weight: 700;
@@ -602,6 +612,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 52px;
     font-size: 22px;
   }
+  .feature-card__icon-glyph { width: 20px; height: 20px; }
   .feature-card h3 {
     grid-area: title;
     align-self: end;
