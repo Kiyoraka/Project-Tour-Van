@@ -564,8 +564,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .feature-card__icon-img {
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
 }
 
@@ -609,7 +609,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 52px;
     font-size: 22px;
   }
-  .feature-card__icon-img { width: 25px; height: 25px; }
+  .feature-card__icon-img { width: 31px; height: 31px; }
   .feature-card h3 {
     grid-area: title;
     align-self: end;
