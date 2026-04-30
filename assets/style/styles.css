@@ -890,6 +890,7 @@ input:focus-visible,
   line-height: 1.65;
   animation: faqFadeIn 0.22s ease;
 }
+.faq__body p + p { margin-top: var(--space-3); }
 
 @keyframes faqFadeIn {
   from { opacity: 0; transform: translateY(-4px); }
