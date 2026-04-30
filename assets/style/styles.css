@@ -1014,7 +1014,7 @@ input:focus-visible,
   height: 44px;
   border-radius: 50%;
   background: var(--brand-tint);
-  color: var(--brand-primary);
+  color: var(--ink-900);
   display: inline-flex;
   align-items: center;
   justify-content: center;
