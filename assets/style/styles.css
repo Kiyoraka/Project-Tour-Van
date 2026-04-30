@@ -1230,8 +1230,65 @@ input:focus-visible,
 }
 
 @media (max-width: 600px) {
-  .steps { grid-template-columns: 1fr; }
   .how-to-book { padding: var(--space-8) 0; }
+
+  /* Vertical Timeline Rail (Design 3) */
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 28px;
+  }
+
+  .step {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 0 var(--space-4) var(--space-4);
+    text-align: left;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .step:last-child { padding-bottom: 0; }
+
+  .step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 28px;
+    bottom: -14px;
+    width: 2px;
+    background: var(--brand-tint);
+    z-index: 0;
+  }
+
+  .step__number {
+    top: 0;
+    left: -28px;
+    transform: none;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(63, 106, 219, 0.25);
+    z-index: 1;
+  }
+
+  .step__icon {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: transparent;
+    font-size: 18px;
+    margin-top: 0;
+  }
+
+  .step__title { font-size: 15px; }
+
+  .step__desc {
+    font-size: 13px;
+    line-height: 1.45;
+    max-width: none;
+  }
 }
 
 /* ============================================================================
