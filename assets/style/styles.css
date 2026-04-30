@@ -1041,28 +1041,6 @@ input:focus-visible,
   .content-block { padding: var(--space-12) 0; }
 }
 
-/* Testimonial block */
-.testimonial-block {
-  padding: var(--space-16) 0;
-  background: var(--surface);
-  text-align: center;
-}
-.testimonial-block__quote {
-  font-size: clamp(22px, 2.6vw, 32px);
-  font-weight: 600;
-  font-style: italic;
-  color: var(--ink-900);
-  max-width: 28ch;
-  margin: 0 auto var(--space-4);
-  line-height: 1.4;
-}
-.testimonial-block__attr {
-  color: var(--ink-500);
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 /* ============================================================================
    Phase 6: How to Book (4 illustrated steps)
    ============================================================================ */
