@@ -411,7 +411,13 @@
         <h2 class="section-heading" id="routesHeading">Popular routes</h2>
         <p class="section-subheading">Most booked transfers from Kuala Lumpur International Airport. Fixed prices, no surge.</p>
 
-        <ul class="routes__list">
+        <div class="routes__tabs" role="tablist" aria-label="Route categories">
+          <button type="button" class="routes__tab is-active" data-tab="popular" role="tab" aria-selected="true" aria-controls="routesPanelPopular">Popular routes</button>
+          <button type="button" class="routes__tab" data-tab="addstop" role="tab" aria-selected="false" aria-controls="routesPanelAddstop">Add stop</button>
+          <button type="button" class="routes__tab" data-tab="daytour" role="tab" aria-selected="false" aria-controls="routesPanelDaytour">Day tour</button>
+        </div>
+
+        <ul class="routes__list routes__panel" data-panel="popular" id="routesPanelPopular" role="tabpanel">
           <li><a href="#">Kuala Lumpur Airport &ndash; Kuala Lumpur</a></li>
           <li><a href="#">Kuala Lumpur Airport &ndash; Johor Bharu</a></li>
           <li><a href="#">Kuala Lumpur Airport &ndash; Penang</a></li>
@@ -422,6 +428,32 @@
           <li><a href="#">Kuala Lumpur Airport &ndash; Genting Highland</a></li>
           <li><a href="#">Kuala Lumpur Airport &ndash; Cameron Highland</a></li>
           <li><a href="#">Kuala Lumpur Airport &ndash; Mersing</a></li>
+        </ul>
+
+        <ul class="routes__list routes__panel" data-panel="addstop" id="routesPanelAddstop" role="tabpanel" hidden>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Genting Highland (via Kuala Lumpur)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Cameron Highland (via Ipoh)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Penang (via Ipoh)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Johor Bharu (via Malacca)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Kuantan (via Genting)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Kuala Lumpur (via Putrajaya)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Mersing (via Johor Bharu)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Ipoh (via Kuala Lumpur)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Malacca (via Putrajaya)</a></li>
+          <li><a href="#">Kuala Lumpur Airport &ndash; Klang (via Subang)</a></li>
+        </ul>
+
+        <ul class="routes__list routes__panel" data-panel="daytour" id="routesPanelDaytour" role="tabpanel" hidden>
+          <li><a href="#">Kuala Lumpur City Full Day Tour</a></li>
+          <li><a href="#">Genting Highland Full Day Tour</a></li>
+          <li><a href="#">Cameron Highland Full Day Tour</a></li>
+          <li><a href="#">Malacca Heritage Full Day Tour</a></li>
+          <li><a href="#">Penang Heritage Full Day Tour</a></li>
+          <li><a href="#">Ipoh Heritage Full Day Tour</a></li>
+          <li><a href="#">Putrajaya Half Day Tour</a></li>
+          <li><a href="#">Kuala Selangor Fireflies Day Tour</a></li>
+          <li><a href="#">Batu Caves Half Day Tour</a></li>
+          <li><a href="#">Sunway Lagoon Theme Park Day Tour</a></li>
         </ul>
 
         <div class="routes__see-all">

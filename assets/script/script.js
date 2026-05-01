@@ -280,12 +280,38 @@
     });
   }
 
+  /**
+   * Routes tabs — Popular routes / Add stop / Day tour underline-style tab switcher.
+   * Click a tab → flips is-active + aria-selected, shows its matching panel via [hidden] attribute.
+   */
+  function initRoutesTabs() {
+    var tabBar = document.querySelector('.routes__tabs');
+    if (!tabBar) return;
+    var tabs = tabBar.querySelectorAll('.routes__tab');
+    var panels = document.querySelectorAll('.routes__panel');
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var target = tab.dataset.tab;
+        tabs.forEach(function (t) {
+          var isActive = t === tab;
+          t.classList.toggle('is-active', isActive);
+          t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        panels.forEach(function (p) {
+          p.hidden = p.dataset.panel !== target;
+        });
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initSiteNav();
     initTripToggle();
     initDateCells();
     initPaxPopover();
     initBookingForm();
+    initRoutesTabs();
     // Phase 4+ hooks will land here:
     //   initReviewsScroll();
   });
