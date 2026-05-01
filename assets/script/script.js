@@ -53,21 +53,67 @@
   }
 
   /**
-   * Trip toggle — One way pill (left, always active) + Return trip iOS switch (right)
-   * Shows/hides the return-date booking row based on switch state.
+   * Trip toggle — One way pill (left) + Return trip iOS switch (right)
+   * Switch ON  → round-trip: pill loses is-active, return cell visible
+   * Switch OFF → one-way:    pill regains is-active, return cell hidden
+   * Tapping the One way pill explicitly forces the switch OFF.
    */
   function initTripToggle() {
     var switchEl = document.getElementById('tripToggleSwitch');
+    var oneWayPill = document.querySelector('.trip-toggle__pill[data-trip="oneway"]');
     var returnRow = document.getElementById('bookingReturnRow');
     if (!switchEl) return;
 
+    function applyState(isReturn) {
+      switchEl.setAttribute('aria-checked', isReturn ? 'true' : 'false');
+      if (oneWayPill) oneWayPill.classList.toggle('is-active', !isReturn);
+      if (returnRow) returnRow.hidden = !isReturn;
+    }
+
     switchEl.addEventListener('click', function () {
       var isOn = switchEl.getAttribute('aria-checked') === 'true';
-      var next = !isOn;
-      switchEl.setAttribute('aria-checked', next ? 'true' : 'false');
-      if (returnRow) {
-        returnRow.hidden = !next;
+      applyState(!isOn);
+    });
+
+    if (oneWayPill) {
+      oneWayPill.addEventListener('click', function () {
+        applyState(false);
+      });
+    }
+  }
+
+  /**
+   * Date cells — keep the visible label in sync with native <input type="date"> value.
+   * Empty   → show default placeholder ("Departure" / "Return") in muted ink-500.
+   * Filled  → show formatted date string in ink-900 (medium weight via [data-has-value]).
+   */
+  function initDateCells() {
+    var cells = document.querySelectorAll('.booking-row__date-cell');
+    cells.forEach(function (cell) {
+      var input = cell.querySelector('.booking-row__date-input');
+      var label = cell.querySelector('.booking-row__date-label');
+      if (!input || !label) return;
+
+      var defaultText = label.dataset.default || label.textContent;
+
+      function sync() {
+        if (input.value) {
+          cell.setAttribute('data-has-value', '');
+          var d = new Date(input.value);
+          if (!isNaN(d.getTime())) {
+            label.textContent = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+          } else {
+            label.textContent = input.value;
+          }
+        } else {
+          cell.removeAttribute('data-has-value');
+          label.textContent = defaultText;
+        }
       }
+
+      input.addEventListener('change', sync);
+      input.addEventListener('input', sync);
+      sync();
     });
   }
 
@@ -217,6 +263,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     initSiteNav();
     initTripToggle();
+    initDateCells();
     initPaxPopover();
     initBookingForm();
     // Phase 4+ hooks will land here:

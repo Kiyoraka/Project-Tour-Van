@@ -82,18 +82,17 @@
             </div>
           </div>
 
-          <div class="booking-row">
-            <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
-            <div class="booking-row__field">
-              <input type="date" class="booking-input" id="bookingDate" name="date" placeholder="Departure" aria-label="Departure date" required>
-            </div>
-          </div>
-
-          <div class="booking-row booking-row--return" id="bookingReturnRow" hidden>
-            <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
-            <div class="booking-row__field">
-              <input type="date" class="booking-input" id="bookingReturnDate" name="returnDate" placeholder="Return" aria-label="Return date">
-            </div>
+          <div class="booking-row booking-row--dates">
+            <label class="booking-row__date-cell" for="bookingDate">
+              <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
+              <span class="booking-row__date-label" data-default="Departure">Departure</span>
+              <input type="date" class="booking-row__date-input" id="bookingDate" name="date" aria-label="Departure date" required>
+            </label>
+            <label class="booking-row__date-cell" id="bookingReturnRow" for="bookingReturnDate" hidden>
+              <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
+              <span class="booking-row__date-label" data-default="Return">Return</span>
+              <input type="date" class="booking-row__date-input" id="bookingReturnDate" name="returnDate" aria-label="Return date">
+            </label>
           </div>
 
           <div class="booking-row booking-row--pax">
