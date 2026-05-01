@@ -206,14 +206,14 @@ h1, h2, h3, h4, h5, h6 {
    ---------------------------------------------------------------------------- */
 .trip-toggle {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .trip-toggle__pill-wrap {
   display: inline-flex;
+  align-self: flex-start;
   padding: 6px;
   border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.12);
@@ -242,6 +242,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .trip-toggle__return {
   display: inline-flex;
+  align-self: flex-end;
   align-items: center;
   gap: var(--space-2);
 }
