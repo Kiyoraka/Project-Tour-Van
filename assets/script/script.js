@@ -289,6 +289,8 @@
     if (!tabBar) return;
     var tabs = tabBar.querySelectorAll('.routes__tab');
     var panels = document.querySelectorAll('.routes__panel');
+    var heading = document.getElementById('routesHeading');
+    var subheading = document.querySelector('.routes .section-subheading');
 
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
@@ -301,6 +303,8 @@
         panels.forEach(function (p) {
           p.hidden = p.dataset.panel !== target;
         });
+        if (heading && tab.dataset.heading) heading.textContent = tab.dataset.heading;
+        if (subheading && tab.dataset.subheading) subheading.textContent = tab.dataset.subheading;
       });
     });
   }
