@@ -53,29 +53,21 @@
   }
 
   /**
-   * Trip toggle — One way / Return trip pill switching
-   * Shows/hides the return-date booking row based on selection.
+   * Trip toggle — One way pill (left, always active) + Return trip iOS switch (right)
+   * Shows/hides the return-date booking row based on switch state.
    */
   function initTripToggle() {
-    var toggle = document.getElementById('tripToggle');
+    var switchEl = document.getElementById('tripToggleSwitch');
     var returnRow = document.getElementById('bookingReturnRow');
-    if (!toggle) return;
+    if (!switchEl) return;
 
-    var pills = toggle.querySelectorAll('.trip-toggle__pill');
-    pills.forEach(function (pill) {
-      pill.addEventListener('click', function () {
-        pills.forEach(function (p) {
-          p.classList.remove('is-active');
-          p.setAttribute('aria-selected', 'false');
-        });
-        pill.classList.add('is-active');
-        pill.setAttribute('aria-selected', 'true');
-
-        if (returnRow) {
-          var isReturn = pill.dataset.trip === 'return';
-          returnRow.hidden = !isReturn;
-        }
-      });
+    switchEl.addEventListener('click', function () {
+      var isOn = switchEl.getAttribute('aria-checked') === 'true';
+      var next = !isOn;
+      switchEl.setAttribute('aria-checked', next ? 'true' : 'false');
+      if (returnRow) {
+        returnRow.hidden = !next;
+      }
     });
   }
 
@@ -90,13 +82,21 @@
     var trigger = document.getElementById('paxTrigger');
     var popover = document.getElementById('paxPopover');
     var doneBtn = document.getElementById('paxPopoverDone');
+    var luggageTotalEl = document.getElementById('luggageTotalDisplay');
     if (!trigger || !popover) return;
 
     var clamps = {
       pax:     { min: 1, max: 9, valueEl: document.getElementById('paxCount'),     displayEl: document.getElementById('paxCountDisplay') },
-      luggage: { min: 0, max: 9, valueEl: document.getElementById('luggageCount'), displayEl: document.getElementById('luggageCountDisplay') },
-      carryon: { min: 0, max: 9, valueEl: document.getElementById('carryonCount'), displayEl: document.getElementById('carryonCountDisplay') }
+      luggage: { min: 0, max: 9, valueEl: document.getElementById('luggageCount'), displayEl: null },
+      carryon: { min: 0, max: 9, valueEl: document.getElementById('carryonCount'), displayEl: null }
     };
+
+    function updateLuggageTotal() {
+      if (!luggageTotalEl) return;
+      var l = clamps.luggage.valueEl ? parseInt(clamps.luggage.valueEl.textContent, 10) || 0 : 0;
+      var c = clamps.carryon.valueEl ? parseInt(clamps.carryon.valueEl.textContent, 10) || 0 : 0;
+      luggageTotalEl.textContent = String(l + c);
+    }
 
     function open() {
       popover.hidden = false;
@@ -142,6 +142,7 @@
 
       clamp.valueEl.textContent = String(next);
       if (clamp.displayEl) clamp.displayEl.textContent = String(next);
+      if (target === 'luggage' || target === 'carryon') updateLuggageTotal();
 
       // Disable buttons at clamp edges
       updateClampButtons(target);
@@ -157,8 +158,9 @@
       if (plusBtn) plusBtn.disabled = current >= clamp.max;
     }
 
-    // Initialize button states
+    // Initialize button states + combined luggage total
     Object.keys(clamps).forEach(updateClampButtons);
+    updateLuggageTotal();
   }
 
   /**
@@ -172,8 +174,8 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var activePill = document.querySelector('.trip-toggle__pill.is-active');
-      var tripType = activePill ? activePill.dataset.trip : 'oneway';
+      var switchEl = document.getElementById('tripToggleSwitch');
+      var tripType = (switchEl && switchEl.getAttribute('aria-checked') === 'true') ? 'return' : 'oneway';
 
       function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
       function num(id) { var el = document.getElementById(id); return el ? parseInt(el.textContent, 10) || 0 : 0; }
