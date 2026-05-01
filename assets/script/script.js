@@ -110,6 +110,9 @@
         }
       }
 
+      // Per-input label text shown below the flatpickr time row ("Departure time" / "Return time")
+      var timeLabelText = input.id === 'bookingReturnDate' ? 'Return time' : 'Departure time';
+
       // Use flatpickr if loaded (CDN). Falls back to plain text input if not (graceful degradation).
       if (typeof flatpickr === 'function') {
         flatpickr(input, {
@@ -121,6 +124,16 @@
           defaultHour: 9,
           defaultMinute: 0,
           disableMobile: true, // force flatpickr UI on mobile (don't fall back to native), so date+time picker shows consistently
+          onReady: function (selectedDates, dateStr, instance) {
+            var calendar = instance.calendarContainer;
+            if (!calendar) return;
+            var timeRow = calendar.querySelector('.flatpickr-time');
+            if (!timeRow || calendar.querySelector('.flatpickr-time-label')) return;
+            var labelEl = document.createElement('div');
+            labelEl.className = 'flatpickr-time-label';
+            labelEl.textContent = timeLabelText;
+            timeRow.parentNode.insertBefore(labelEl, timeRow.nextSibling);
+          },
           onChange: function (selectedDates) {
             applyDate(selectedDates && selectedDates[0] ? selectedDates[0] : null);
           },

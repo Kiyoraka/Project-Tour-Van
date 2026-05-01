@@ -286,6 +286,16 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(20px);
 }
 
+/* Flatpickr time-row label injected via initDateCells onReady — "Departure time" / "Return time" */
+.flatpickr-time-label {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-500);
+  padding: 6px 0 10px;
+  border-top: 1px solid rgba(15, 27, 45, 0.06);
+}
+
 /* ----------------------------------------------------------------------------
    Booking Card
    ---------------------------------------------------------------------------- */
