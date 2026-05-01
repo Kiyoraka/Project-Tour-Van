@@ -83,9 +83,11 @@
   }
 
   /**
-   * Date cells — keep the visible label in sync with native <input type="date"> value.
-   * Empty   → show default placeholder ("Departure" / "Return") in muted ink-500.
-   * Filled  → show formatted date string in ink-900 (medium weight via [data-has-value]).
+   * Date cells — flatpickr-powered date + time picker on each Departure/Return cell.
+   * Tapping the cell opens the picker (calendar grid + time selector + Done implicit on close).
+   * Empty   → label shows default placeholder ("Departure" / "Return") in muted ink-500.
+   * Filled  → label shows "Wed, Apr 30, 5:00 PM" formatted string in ink-900.
+   * Booking form payload reads input.value (ISO-ish "Y-m-d H:i") on submit, downstream parses.
    */
   function initDateCells() {
     var cells = document.querySelectorAll('.booking-row__date-cell');
@@ -96,24 +98,42 @@
 
       var defaultText = label.dataset.default || label.textContent;
 
-      function sync() {
-        if (input.value) {
+      function applyDate(d) {
+        if (d) {
           cell.setAttribute('data-has-value', '');
-          var d = new Date(input.value);
-          if (!isNaN(d.getTime())) {
-            label.textContent = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-          } else {
-            label.textContent = input.value;
-          }
+          var datePart = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+          var timePart = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+          label.textContent = datePart + ', ' + timePart;
         } else {
           cell.removeAttribute('data-has-value');
           label.textContent = defaultText;
         }
       }
 
-      input.addEventListener('change', sync);
-      input.addEventListener('input', sync);
-      sync();
+      // Use flatpickr if loaded (CDN). Falls back to plain text input if not (graceful degradation).
+      if (typeof flatpickr === 'function') {
+        flatpickr(input, {
+          enableTime: true,
+          time_24hr: false,
+          minuteIncrement: 15,
+          minDate: 'today',
+          dateFormat: 'Y-m-d H:i',
+          defaultHour: 9,
+          defaultMinute: 0,
+          disableMobile: true, // force flatpickr UI on mobile (don't fall back to native), so date+time picker shows consistently
+          onChange: function (selectedDates) {
+            applyDate(selectedDates && selectedDates[0] ? selectedDates[0] : null);
+          },
+          onClose: function (selectedDates) {
+            applyDate(selectedDates && selectedDates[0] ? selectedDates[0] : null);
+          }
+        });
+      } else {
+        // Fallback: plain text input, simple input listener (rare path — only if CDN fails)
+        input.addEventListener('input', function () {
+          applyDate(input.value ? new Date(input.value) : null);
+        });
+      }
     });
   }
 

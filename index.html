@@ -14,9 +14,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
+  <!-- Flatpickr (date + time picker) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+
   <!-- Project styles -->
   <link rel="stylesheet" href="assets/style/styles.css">
 
+  <!-- Flatpickr JS (loaded before project script so initDateCells can use it) -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13"></script>
   <!-- Project scripts (deferred) -->
   <script defer src="assets/script/script.js"></script>
 </head>
@@ -86,12 +91,12 @@
             <label class="booking-row__date-cell" for="bookingDate">
               <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
               <span class="booking-row__date-label" data-default="Departure">Departure</span>
-              <input type="date" class="booking-row__date-input" id="bookingDate" name="date" aria-label="Departure date" required>
+              <input type="text" class="booking-row__date-input" id="bookingDate" name="date" aria-label="Departure date" required>
             </label>
             <label class="booking-row__date-cell" id="bookingReturnRow" for="bookingReturnDate" hidden>
               <i class="fa-solid fa-calendar-day booking-row__icon" aria-hidden="true"></i>
               <span class="booking-row__date-label" data-default="Return">Return</span>
-              <input type="date" class="booking-row__date-input" id="bookingReturnDate" name="returnDate" aria-label="Return date">
+              <input type="text" class="booking-row__date-input" id="bookingReturnDate" name="returnDate" aria-label="Return date">
             </label>
           </div>
 
